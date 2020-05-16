@@ -15,7 +15,7 @@ RUN adduser ci && \
     pip3 install ansible==2.9.7 && \
     yum clean all
 
-RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o "awscliv2.zip"  && \
+RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o "terraform_${TERRAFORM_VERSION}_linux_amd64.zip"  && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     rm -rf terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
     chown ci:ci terraform && \
