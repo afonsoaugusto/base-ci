@@ -1,9 +1,16 @@
 MAKEFLAGS  	+= --silent
 SHELL      	 = /bin/bash
 
-PROJECT_NAME   			= $(shell basename $(CURDIR))
-BRANCH_NAME   			= $(shell git rev-parse --abbrev-ref HEAD)
-COMMIT_SHA   				= $(shell git rev-parse --short HEAD)
+PROJECT_NAME := ${CIRCLE_PROJECT_REPONAME}
+BRANCH_NAME  := ${CIRCLE_BRANCH}
+COMMIT_SHA   := $(shell echo ${CIRCLE_SHA1} | head -c 7) 
+
+ifeq ($(CIRCLE_PROJECT_REPONAME),)
+	PROJECT_NAME   			:= $(shell basename $(CURDIR))
+	BRANCH_NAME   			:= $(shell git rev-parse --abbrev-ref HEAD)
+	COMMIT_SHA   			:= $(shell git rev-parse --short HEAD)
+endif
+
 # IMAGE_REGISTRY					 := 
 # IMAGE_REGISTRY_USERNAME  := 
 # IMAGE_REGISTRY_TOKEN		 := 
