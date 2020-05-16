@@ -1,5 +1,6 @@
 # base-ci
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/25cba861ce2649f29eb31afc4d051bb7)](https://app.codacy.com/manual/afonsoaugustoventura/base-ci?utm_source=github.com&utm_medium=referral&utm_content=afonsoaugusto/base-ci&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/afonsoaugusto/base-ci/tree/master.svg?style=svg)](https://circleci.com/gh/afonsoaugusto/base-ci/tree/master)
 
 Image base to execute pipelines
