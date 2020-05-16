@@ -1,7 +1,5 @@
 # base-ci
 
-[![CircleCI](https://circleci.com/gh/afonsoaugusto/base-ci?style=svg)](https://circleci.com/gh/afonsoaugusto/base-ci)
-
 [![CircleCI](https://circleci.com/gh/afonsoaugusto/base-ci/tree/master.svg?style=svg)](https://circleci.com/gh/afonsoaugusto/base-ci/tree/master)
 
 Image base to execute pipelines
