@@ -23,7 +23,6 @@ docker-login:
 	echo ${IMAGE_REGISTRY_TOKEN} | docker login -u ${IMAGE_REGISTRY_USERNAME} --password-stdin ${IMAGE_REGISTRY}
 
 docker-build: docker-login
-	echo $(IMAGE_NAME_COMMIT)
 	docker build -t $(IMAGE_NAME_COMMIT) . && \
 	docker push $(IMAGE_NAME_COMMIT)
 
