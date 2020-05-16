@@ -7,12 +7,12 @@ Image base to execute pipelines
 
 ## Itens in this image
 
-* TERRAFORM 0.12.24
-* GCLOUD 266.0.0
-* Ansible
-* AWS CLI
-* Python3
-* Ruby
+*  TERRAFORM 0.12.24
+*  GCLOUD 266.0.0
+*  Ansible
+*  AWS CLI
+*  Python3
+*  Ruby
 
 ```sh
 > $ docker run --rm -it base-ci bash
@@ -30,10 +30,4 @@ Terraform v0.12.24
 [ci@055f78b59d47 /]$ aws --version
 
 aws-cli/2.0.12 Python/3.7.3 Linux/5.0.0-38-generic botocore/2.0.0dev16
-[ci@055f78b59d47 /]$ gcloud version
-Google Cloud SDK 266.0.0
-bq 2.0.48
-core 2019.10.04
-gsutil 4.44
-[ci@055f78b59d47 /]$
 ```
