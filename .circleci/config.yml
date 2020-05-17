@@ -5,8 +5,9 @@ orbs:
 
 jobs:
   build:
-    docker:
-      - image: docker:stable-git
+    # docker:
+    #   - image: afonsoaugusto/base-ci:latest
+    machine: true
     steps:
       - setup_remote_docker
       - checkout
@@ -14,19 +15,8 @@ jobs:
           name: build
           command: |
             make build
-
-  scan:
-    executor: clair_scanner/default
-    steps:
-    - clair_scanner/scan:
-        image: debian:stretch            
-
-  publish:
-    docker:
-      - image: docker:stable-git
-    steps:
-      - setup_remote_docker
-      - checkout
+      - clair_scanner/scan:
+          image: debian:stretch            
       - run:
           name: publish
           command: |
@@ -36,7 +26,4 @@ workflows:
   workflow:
     jobs:
       - build:
-          context: CI
-      - scan
-      - publish:
           context: CI
