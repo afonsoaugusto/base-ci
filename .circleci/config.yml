@@ -3,9 +3,9 @@ version: 2.1
 
 jobs:
   build:
-    # docker:
-    #   - image: centos:7
-    machine: true
+    docker:
+      - image: afonsoaugusto/base-ci:latest
+    #machine: true
     steps:
       - checkout
       - run:
