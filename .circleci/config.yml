@@ -5,9 +5,9 @@ orbs:
 
 jobs:
   build:
-    # docker:
-    #   - image: afonsoaugusto/base-ci:latest
-    machine: true
+    docker:
+      - image: afonsoaugusto/base-ci:latest
+    # machine: true
     steps:
       - setup_remote_docker
       - checkout
