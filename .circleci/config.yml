@@ -4,39 +4,39 @@ orbs:
   clair_scanner: ovotech/clair-scanner@1
 
 jobs:
-  build-image:
+  build:
     docker:
       - image: docker:stable-git
     steps:
       - setup_remote_docker
       - checkout
       - run:
-          name: build-image
+          name: build
           command: |
-            make build-image
+            make build
 
-  scan-images:
+  scan:
     executor: clair_scanner/default
     steps:
     - clair_scanner/scan:
         image: debian:stretch            
 
-  build-publish:
+  publish:
     docker:
       - image: docker:stable-git
     steps:
       - setup_remote_docker
       - checkout
       - run:
-          name: build-publish
+          name: publish
           command: |
-            make build-publish
+            make publish
 
 workflows:
   workflow:
     jobs:
-      - build-image:
+      - build:
           context: CI
-      - scan-images
-      - build-publish:
+      - scan
+      - publish:
           context: CI

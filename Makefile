@@ -24,7 +24,8 @@ docker-login:
 
 docker-build: docker-login
 	docker build -t $(IMAGE_NAME_COMMIT) . && \
-	docker push $(IMAGE_NAME_COMMIT)
+	docker push $(IMAGE_NAME_COMMIT) && \
+	docker logout
 
 docker-publish-branch: docker-login
 	docker pull $(IMAGE_NAME_COMMIT)  && \
@@ -41,10 +42,6 @@ docker-clear:
 	docker logout
 
 docker-branch: docker-build docker-publish-branch docker-clear
-docker: docker-build docker-publish docker-clear
 
-docker-image: docker-build docker-clear
-
-build-image: docker-image
-build-publish: docker-publish
-build: docker
+build: docker-build
+publish: docker-publish
