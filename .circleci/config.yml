@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  clair-scanner: ovotech/clair-scanner@1.6.0
+  clair-scanner: ovotech/clair-scanner@1
 
 jobs:
   build-image:
