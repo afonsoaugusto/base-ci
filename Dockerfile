@@ -7,6 +7,7 @@ ARG TERRAFORM_VERSION
 ENV TERRAFORM_VERSION=0.12.24
 
 RUN adduser ci && \
+    yum install make -y && \
     yum install unzip -y && \
     yum install wget -y && \
     yum install ruby -y && \
@@ -28,6 +29,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
     bash get-docker.sh && \
+    usermod -aG docker ci && \
     rm -rf get-docker.sh
 
 WORKDIR /home/ci/
