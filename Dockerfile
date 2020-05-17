@@ -27,6 +27,10 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     rm -rf awscliv2.zip && \
     bash ./aws/install
 
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
+    bash get-docker.sh && \
+    rm -rf get-docker.sh
+
 WORKDIR /home/ci/
 
 USER ci
