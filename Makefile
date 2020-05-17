@@ -34,7 +34,8 @@ docker-publish-branch: docker-login
 docker-publish: docker-login
 	docker pull $(IMAGE_NAME_COMMIT)  && \
 	docker tag $(IMAGE_NAME_COMMIT) $(IMAGE_NAME_LATEST)  && \
-	docker push $(IMAGE_NAME_LATEST)
+	docker push $(IMAGE_NAME_LATEST) && \
+	docker logout
 
 docker-clear:
 	docker logout
@@ -42,5 +43,8 @@ docker-clear:
 docker-branch: docker-build docker-publish-branch docker-clear
 docker: docker-build docker-publish docker-clear
 
-build-branch: docker-branch
+docker-image: docker-build docker-clear
+
+build-image: docker-image
+build-publish: docker-publish
 build: docker

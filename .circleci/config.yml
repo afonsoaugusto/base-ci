@@ -1,20 +1,42 @@
-# https://circleci.com/docs/2.0/config-intro
 version: 2.1
 
+orbs:
+  clair-scanner: ovotech/clair-scanner@1.6.0
+
 jobs:
-  build:
+  build-image:
     docker:
-      - image: afonsoaugusto/base-ci:latest
-    #machine: true
+      - image: docker:stable-git
     steps:
+      - setup_remote_docker
       - checkout
       - run:
-          name: build
+          name: build-image
           command: |
-            make build
+            make build-image
+
+  scan-images:
+    executor: clair_scanner/default
+    steps:
+    - clair_scanner/scan:
+        image: debian:stretch            
+
+  build-publish:
+    docker:
+      - image: docker:stable-git
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: build-publish
+          command: |
+            make build-publish
 
 workflows:
   workflow:
     jobs:
-      - build:
+      - build-image:
+          context: CI
+      - scan-images
+      - build-publish:
           context: CI
