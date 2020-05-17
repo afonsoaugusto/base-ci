@@ -7,6 +7,7 @@ ARG TERRAFORM_VERSION
 ENV TERRAFORM_VERSION=0.12.24
 
 RUN adduser ci && \
+    yum install make -y && \
     yum install unzip -y && \
     yum install wget -y && \
     yum install ruby -y && \
