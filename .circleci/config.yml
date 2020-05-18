@@ -9,8 +9,8 @@ jobs:
       - image: afonsoaugusto/base-ci:latest
     # machine: true
     steps:
-      - setup_remote_docker
       - checkout
+      - setup_remote_docker
       - run:
           name: build
           command: |
