@@ -15,8 +15,8 @@ jobs:
           name: build
           command: |
             make build
-      - clair_scanner/scan:
-          image: debian:stretch            
+      # - clair_scanner/scan:
+      #     image: debian:stretch            
       - run:
           name: publish
           command: |
