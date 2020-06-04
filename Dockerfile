@@ -17,9 +17,12 @@ RUN adduser ci && \
     wget \
     ruby \
     git \
-    docker \
+    tar \
     pip3 install ansible==2.9.7 && \
     yum clean all
+
+RUN amazon-linux-extras install docker -y && \
+    usermod -a -G docker ci
 
 RUN curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o "terraform_${TERRAFORM_VERSION}_linux_amd64.zip"  && \
     unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
