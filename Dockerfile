@@ -1,18 +1,23 @@
-FROM centos:7
+FROM amazonlinux:2
 
-MAINTAINER "Afonso Rodrigues" afonsoaugustoventura@gmail.com
+LABEL maintainer.name="Afonso Rodrigues"
+LABEL maintainer.email=afonsoaugustoventura@gmail.com  
 
 ARG TERRAFORM_VERSION
 
 ENV TERRAFORM_VERSION=0.12.24
 
+RUN yum -y install python3 \
+    python3-pip \
+    shadow-utils
+
 RUN adduser ci && \
-    yum install make -y && \
-    yum install unzip -y && \
-    yum install wget -y && \
-    yum install ruby -y && \
-    yum install git -y && \
-    yum install python3 -y && \
+    yum -y install make \
+    unzip \
+    wget \
+    ruby \
+    git \
+    docker \
     pip3 install ansible==2.9.7 && \
     yum clean all
 
@@ -27,9 +32,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     rm -rf awscliv2.zip && \
     bash ./aws/install
 
-RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
-    bash get-docker.sh && \
-    rm -rf get-docker.sh
+RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin
 
 WORKDIR /home/ci/
 
