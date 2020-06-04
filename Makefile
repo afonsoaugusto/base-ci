@@ -38,10 +38,14 @@ docker-publish: docker-login
 	docker push $(IMAGE_NAME_LATEST) && \
 	docker logout
 
+docker-scan:
+	trivy --exit-code 0 $(IMAGE_NAME_COMMIT)
+
 docker-clear:
 	docker logout
 
 docker-branch: docker-build docker-publish-branch docker-clear
 
 build: docker-build
+scan: docker-scan
 publish: docker-publish
