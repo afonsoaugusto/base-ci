@@ -39,7 +39,7 @@ docker-publish: docker-login
 	docker logout
 
 docker-scan:
-	trivy --exit-code 0 $(IMAGE_NAME_COMMIT)
+	trivy --exit-code 1 $(IMAGE_NAME_COMMIT)
 
 docker-clear:
 	docker logout
