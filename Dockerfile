@@ -7,6 +7,8 @@ ARG TERRAFORM_VERSION
 
 ENV TERRAFORM_VERSION=0.12.24
 
+RUN yum -y update python
+
 RUN yum -y install python3 \
     python3-pip \
     shadow-utils
