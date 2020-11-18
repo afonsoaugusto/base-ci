@@ -7,7 +7,7 @@ ARG TERRAFORM_VERSION
 
 ENV TERRAFORM_VERSION=0.12.29
 
-RUN yum -y update python
+RUN yum -y update
 
 RUN yum -y install python3 \
     python3-pip \
