@@ -5,7 +5,7 @@ LABEL maintainer.email=afonsoaugustoventura@gmail.com
 
 ARG TERRAFORM_VERSION
 
-ENV TERRAFORM_VERSION=0.12.24
+ENV TERRAFORM_VERSION=0.12.29
 
 RUN yum -y update python
 
