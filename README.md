@@ -8,12 +8,12 @@ Image base to execute pipelines
 
 ## Itens in this image
 
-*  TERRAFORM 0.12.24
-*  GCLOUD 266.0.0
-*  Ansible
-*  AWS CLI
-*  Python3
-*  Ruby
+* TERRAFORM 0.12.24
+* GCLOUD 266.0.0
+* Ansible
+* AWS CLI
+* Python3
+* Ruby
 
 ```sh
 > $ docker run --rm -it base-ci bash
