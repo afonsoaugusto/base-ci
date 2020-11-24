@@ -20,6 +20,7 @@ RUN adduser ci && \
     ruby \
     git \
     tar \
+    jq \
     pip3 install ansible==2.9.7 && \
     yum clean all
 
