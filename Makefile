@@ -59,13 +59,15 @@ terraform-tfsec:
 
 terraform-clean:
 	cd ./${TERRAFORM_FOLDER}/ && \
-	rm -rf .terraform/
+	rm -rf .terraform/ && \
+	rm -rf .terraform.* && \
+	rm -rf backend.tf
 
 terraform-fmt:
 	cd ./${TERRAFORM_FOLDER}/ && \
 	terraform fmt -recursive
 
-terraform-init:
+terraform-init: terraform-generate-backend
 	cd ./${TERRAFORM_FOLDER}/ && \
 	terraform init \
 	-backend-config="key=${PROJECT_NAME}/terraform.tfstate" \
