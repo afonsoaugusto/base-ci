@@ -1,6 +1,8 @@
 MAKEFLAGS  	+= --silent
 SHELL      	 = /bin/bash
 
+AWS_PAGER	 := ""
+
 PROJECT_NAME := ${CIRCLE_PROJECT_REPONAME}
 BRANCH_NAME  := ${CIRCLE_BRANCH}
 COMMIT_SHA   := $(shell echo ${CIRCLE_SHA1}| head -c 7)
