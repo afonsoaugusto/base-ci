@@ -4,6 +4,8 @@ SHELL      	 = /bin/bash
 export AWS_PAGER
 export env
 export TF_VAR_env
+export PROJECT_NAME
+export TF_VAR_project_name
 
 AWS_PAGER	 := ""
 
@@ -18,7 +20,10 @@ ifndef CIRCLE_PROJECT_REPONAME
 endif
 
 env := ${BRANCH_NAME}
+
 TF_VAR_env := ${env}
+TF_VAR_project_name := ${PROJECT_NAME}
+
 # IMAGE_REGISTRY					 := 
 # IMAGE_REGISTRY_USERNAME  := 
 # IMAGE_REGISTRY_TOKEN		 := 
