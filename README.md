@@ -8,8 +8,8 @@ Image base to execute pipelines
 
 ## Itens in this image
 
-* TERRAFORM 0.12.24
-* GCLOUD 266.0.0
+* TERRAFORM 0.14.7
+* TFSEC 0.38.4
 * Ansible
 * AWS CLI
 * Python3
