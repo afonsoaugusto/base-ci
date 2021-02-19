@@ -4,8 +4,10 @@ LABEL maintainer.name="Afonso Rodrigues"
 LABEL maintainer.email=afonsoaugustoventura@gmail.com  
 
 ARG TERRAFORM_VERSION
+ARG TFSEC_VERSION
 
-ENV TERRAFORM_VERSION=0.12.29
+ENV TERRAFORM_VERSION=0.14.7
+ENV TFSEC_VERSION=0.38.4
 
 RUN yum -y update
 
@@ -21,7 +23,7 @@ RUN adduser ci && \
     git \
     tar \
     jq \
-    pip3 install ansible==2.9.7 && \
+    pip3 install ansible==3.0.0 && \
     yum clean all
 
 RUN amazon-linux-extras install docker -y && \
@@ -39,6 +41,11 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     bash ./aws/install
 
 RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin
+
+RUN curl https://github.com/tfsec/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-linux-amd64 -o "tfsec"  && \
+    chown ci:ci tfsec && \
+    chmod +x tfsec && \
+    mv  tfsec /bin/tfsec
 
 WORKDIR /home/ci/
 
