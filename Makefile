@@ -1,6 +1,10 @@
 MAKEFLAGS  	+= --silent
 SHELL      	 = /bin/bash
 
+export AWS_PAGER
+export env
+export TF_VAR_env
+
 AWS_PAGER	 := ""
 
 PROJECT_NAME := ${CIRCLE_PROJECT_REPONAME}
