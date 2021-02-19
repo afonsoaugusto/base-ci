@@ -63,7 +63,8 @@ terraform-clean:
 	rm -rf .terraform.* && \
 	rm -rf backend.tf && \
 	rm -rf terraform.tfstate.d && \
-	rm -rf .terraform.lock.hcl
+	rm -rf .terraform.lock.hcl && \
+	rm -rf tf.plan
 
 terraform-fmt:
 	cd ./${TERRAFORM_FOLDER}/ && \
