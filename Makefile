@@ -13,6 +13,8 @@ ifndef CIRCLE_PROJECT_REPONAME
 	COMMIT_SHA   			:= $(shell git rev-parse --short HEAD)
 endif
 
+env := ${BRANCH_NAME}
+TF_VAR_env := ${env}
 # IMAGE_REGISTRY					 := 
 # IMAGE_REGISTRY_USERNAME  := 
 # IMAGE_REGISTRY_TOKEN		 := 
@@ -79,13 +81,13 @@ terraform-init: terraform-generate-backend
 
 terraform-select-workspace: terraform-init
 	- cd ./${TERRAFORM_FOLDER}/ && \
-	terraform workspace new $(BRANCH_NAME) 
+	terraform workspace new $(env) 
 	cd ./${TERRAFORM_FOLDER}/ && \
-	terraform workspace select $(BRANCH_NAME)
+	terraform workspace select $(env)
 
 terraform-plan: terraform-select-workspace terraform-tfsec
 	cd ./${TERRAFORM_FOLDER}/ && \
-	terraform plan -var-file=vars/global.tfvars -var-file=vars/${BRANCH_NAME}.tfvars -out tf.plan
+	terraform plan -var-file=vars/global.tfvars -var-file=vars/${env}.tfvars -out tf.plan
 
 terraform-deploy: terraform-select-workspace
 	cd ./${TERRAFORM_FOLDER}/ && \
@@ -93,7 +95,7 @@ terraform-deploy: terraform-select-workspace
 	
 terraform-destroy: terraform-select-workspace
 	cd ./${TERRAFORM_FOLDER}/ && \
-	terraform destroy -auto-approve -var-file=vars/global.tfvars -var-file=vars/${BRANCH_NAME}.tfvars
+	terraform destroy -auto-approve -var-file=vars/global.tfvars -var-file=vars/${env}.tfvars
 
 build: docker-build
 scan: docker-scan
