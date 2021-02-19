@@ -46,6 +46,48 @@ docker-clear:
 
 docker-branch: docker-build docker-publish-branch docker-clear
 
+terraform-generate-backend:
+	cd ./${TERRAFORM_FOLDER}/ && \
+	echo -e "terraform {\nbackend "s3" {}\n}" > backend.tf && \
+	terraform fmt
+
+terraform-tfsec:
+	cd ./${TERRAFORM_FOLDER}/ && \
+	tfsec . --no-color
+
+terraform-clean:
+	cd ./${TERRAFORM_FOLDER}/ && \
+	rm -rf .terraform/
+
+terraform-fmt:
+	cd ./${TERRAFORM_FOLDER}/ && \
+	terraform fmt -recursive
+
+terraform-init:
+	cd ./${TERRAFORM_FOLDER}/ && \
+	terraform init \
+	-backend-config="key=${PROJECT_NAME}/terraform.tfstate" \
+	-backend-config="region=${AWS_REGION}" \
+	-backend-config="bucket=${BUCKET_NAME}" 
+
+terraform-select-workspace: terraform-init
+	- cd ./${TERRAFORM_FOLDER}/ && \
+	terraform workspace new $(BRANCH_NAME) 
+	cd ./${TERRAFORM_FOLDER}/ && \
+	terraform workspace select $(BRANCH_NAME)
+
+terraform-plan: terraform-select-workspace terraform-tfsec
+	cd ./${TERRAFORM_FOLDER}/ && \
+	terraform plan -var-file=vars/global.tfvars -var-file=vars/${BRANCH_NAME}.tfvars -out tf.plan
+
+terraform-deploy: terraform-select-workspace
+	cd ./${TERRAFORM_FOLDER}/ && \
+	terraform apply -auto-approve tf.plan
+	
+terraform-destroy: terraform-select-workspace
+	cd ./${TERRAFORM_FOLDER}/ && \
+	terraform destroy -auto-approve -var-file=vars/global.tfvars -var-file=vars/${BRANCH_NAME}.tfvars
+
 build: docker-build
 scan: docker-scan
 publish: docker-publish

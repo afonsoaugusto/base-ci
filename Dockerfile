@@ -42,10 +42,10 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 
 RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin
 
-RUN curl https://github.com/tfsec/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-linux-amd64 -o "tfsec"  && \
+RUN curl -Lso tfsec https://github.com/tfsec/tfsec/releases/download/v0.34.0/tfsec-linux-amd64 && \
     chown ci:ci tfsec && \
     chmod +x tfsec && \
-    mv  tfsec /bin/tfsec
+    mv tfsec /bin/tfsec
 
 WORKDIR /home/ci/
 
